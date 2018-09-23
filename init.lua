@@ -30,14 +30,17 @@ for _,c in ipairs(floodables) do
     minetest.override_item(c.name, {
       floodable = true,
       on_flood = function(pos, oldnode, newnode)
-        minetest.remove_node(pos)
+        --minetest.remove_node(pos)
+		if pos.y > 1 then
+		minetest.set_node(pos, {name="air"})
+		end
         if c.sound ~= nil then
           minetest.sound_play({ name = c.sound, gain = c.gain }, { pos = pos, max_hear_distance = 8 })
         end
         if c.drop == nil or c.drop ~= false then c.drop = c.name end
         if c.erode == false then
-              minetest.add_item(pos, {name = c.drop})
-			end
+            minetest.add_item(pos, {name = c.drop})
+		end
         if c.erode == true then
           --minetest.remove_node( { x = pos.x, y = pos.y-1, z = pos.z } )
 		  minetest.set_node({ x = pos.x, y = pos.y-1, z = pos.z }, {name="air"})
@@ -51,9 +54,12 @@ for _,c in ipairs(floodables) do
         minetest.override_item(v.name, {
           floodable = true,
           on_flood = function(pos, oldnode, newnode)
-            minetest.remove_node(pos)
+            --minetest.remove_node(pos)
+			if pos.y > 1 then
+			 minetest.set_node(pos, {name="air"})
+			end
             if c.sound ~= nil then
-              minetest.sound_play({ name = c.sound, gain = c.gain }, { pos = pos, max_hear_distance = 16 })
+              minetest.sound_play({ name = c.sound, gain = c.gain }, { pos = pos, max_hear_distance = 8 })
             end
             if c.drop == nil or c.drop == true then c.drop = v.name end
 			if c.erode == false then
