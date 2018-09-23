@@ -6,7 +6,12 @@ floodables = {
   { group = "grass", drop = "default:grass_1", sound = "floodables_grass", gain = 0.2 },
   { group = "dry_grass", drop = "default:dry_grass_1", sound = "floodables_grass", gain = 0.2 },
   { name = "default:dirt_with_grass", erode = true },
-  --{ group = "soil", erode = true },
+  { group = "wood", erode = true },
+  { group = "tree", erode = true },
+  { group = "sapling", erode = true },
+  { group = "flora", erode = true },
+  { group = "flower", erode = true },
+  --{ group = "soil", erode = true },  this causes massive lag for me
   { name = "default:dirt_with_dry_grass", erode = true },
   { name = "default:dirt", erode = true },
   { name = "default:dirt_with_rainforest_litter", erode = true },
@@ -17,6 +22,7 @@ floodables = {
   { name = "aotearoa:forest_peat", erode = true },
   { name = "aotearoa:dirt_with_dark_litter", erode = true },
   { name = "aotearoa:restiad_peat", erode = true },
+  { name = "aotearoa:peat", erode = true },
 }
 
 for _,c in ipairs(floodables) do
@@ -35,6 +41,7 @@ for _,c in ipairs(floodables) do
         if c.erode == true then
           --minetest.remove_node( { x = pos.x, y = pos.y-1, z = pos.z } )
 		  minetest.set_node({ x = pos.x, y = pos.y-1, z = pos.z }, {name="air"})
+		  --minetest.set_node({ x = pos.x, y = pos.y, z = pos.z }, {name="air"})
         end
       end
     })
@@ -55,6 +62,7 @@ for _,c in ipairs(floodables) do
             if c.erode == true then
               --minetest.remove_node( { x = pos.x, y = pos.y-1, z = pos.z } )
 			  minetest.set_node({ x = pos.x, y = pos.y-1, z = pos.z }, {name="air"})
+			  --minetest.set_node({ x = pos.x, y = pos.y, z = pos.z }, {name="air"})
             end
           end
         })
