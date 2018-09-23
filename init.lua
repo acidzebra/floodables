@@ -2,10 +2,21 @@ floodables = {
   { group = "torch", drop = "default:torch", sound = "floodables_torch", gain = 0.8 },
   { group = "flora", sound = "floodables_grass", gain = 0.2 },
   { group = "wheat", drop = "farming:seed_wheat", sound = "floodables_grass", gain = 0.2 },
-  { name = "default:junglegrass", sound = "floodables_grass", gain = 0.2 },
+  { name = "default:junglegrass",  sound = "floodables_grass", gain = 0.2 },
   { group = "grass", drop = "default:grass_1", sound = "floodables_grass", gain = 0.2 },
   { group = "dry_grass", drop = "default:dry_grass_1", sound = "floodables_grass", gain = 0.2 },
---  { name = "default:dirt_with_grass", erode = true },
+  { name = "default:dirt_with_grass", erode = true },
+  --{ group = "soil", erode = true },
+  { name = "default:dirt_with_dry_grass", erode = true },
+  { name = "default:dirt", erode = true },
+  { name = "default:dirt_with_rainforest_litter", erode = true },
+  { name = "ethereal:bamboo_dirt", erode = true },
+  { name = "ethereal:grove_dirt", erode = true },
+  { name = "ethereal:prairie_dirt", erode = true },
+  { name = "aotearoa:dirt_with_moss", erode = true },
+  { name = "aotearoa:forest_peat", erode = true },
+  { name = "aotearoa:dirt_with_dark_litter", erode = true },
+  { name = "aotearoa:restiad_peat", erode = true },
 }
 
 for _,c in ipairs(floodables) do
@@ -15,12 +26,15 @@ for _,c in ipairs(floodables) do
       on_flood = function(pos, oldnode, newnode)
         minetest.remove_node(pos)
         if c.sound ~= nil then
-          minetest.sound_play({ name = c.sound, gain = c.gain }, { pos = pos, max_hear_distance = 16 })
+          minetest.sound_play({ name = c.sound, gain = c.gain }, { pos = pos, max_hear_distance = 8 })
         end
         if c.drop == nil or c.drop ~= false then c.drop = c.name end
-        minetest.add_item(pos, {name = c.drop})
+        if c.erode == false then
+              minetest.add_item(pos, {name = c.drop})
+			end
         if c.erode == true then
-          minetest.remove_node( { x = pos.x, y = pos.y-1, z = pos.z } )
+          --minetest.remove_node( { x = pos.x, y = pos.y-1, z = pos.z } )
+		  minetest.set_node({ x = pos.x, y = pos.y-1, z = pos.z }, {name="air"})
         end
       end
     })
@@ -35,9 +49,12 @@ for _,c in ipairs(floodables) do
               minetest.sound_play({ name = c.sound, gain = c.gain }, { pos = pos, max_hear_distance = 16 })
             end
             if c.drop == nil or c.drop == true then c.drop = v.name end
-            minetest.add_item(pos, {name = c.drop})
+			if c.erode == false then
+              minetest.add_item(pos, {name = c.drop})
+			end
             if c.erode == true then
-              minetest.remove_node( { x = pos.x, y = pos.y-1, z = pos.z } )
+              --minetest.remove_node( { x = pos.x, y = pos.y-1, z = pos.z } )
+			  minetest.set_node({ x = pos.x, y = pos.y-1, z = pos.z }, {name="air"})
             end
           end
         })
