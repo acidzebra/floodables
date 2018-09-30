@@ -1,13 +1,13 @@
 floodables = {
   { group = "torch", drop = "default:torch", sound = "floodables_torch", gain = 0.8 },
-  { group = "flora", sound = "floodables_grass", gain = 0.2 },
-  { group = "wheat", drop = "farming:seed_wheat", sound = "floodables_grass", gain = 0.2 },
-  { name = "default:junglegrass",  sound = "floodables_grass", gain = 0.2 },
-  { group = "grass", drop = "default:grass_1", sound = "floodables_grass", gain = 0.2 },
-  { group = "dry_grass", drop = "default:dry_grass_1", sound = "floodables_grass", gain = 0.2 },
+  { group = "flora", erode = true},
+  { group = "wheat", erode = true },
+  { name = "default:junglegrass", erode = true},
+  { group = "grass", erode = true },
+  { group = "dry_grass", erode = true },
   { name = "default:dirt_with_grass", erode = true },
-  { group = "wood", erode = true },
-  { group = "tree", erode = true },
+  --{ group = "wood", erode = true },
+  --{ group = "tree", erode = true },
   { group = "sapling", erode = true },
   { group = "flora", erode = true },
   { group = "flower", erode = true },
@@ -15,10 +15,12 @@ floodables = {
   { name = "default:dirt_with_dry_grass", erode = true },
   { name = "default:dirt", erode = true },
   { name = "default:dirt_with_rainforest_litter", erode = true },
+  { name = "default:dirt_with_coniferous_litter", erode = true },
   { name = "ethereal:bamboo_dirt", erode = true },
   { name = "ethereal:grove_dirt", erode = true },
   { name = "ethereal:prairie_dirt", erode = true },
   { name = "aotearoa:dirt_with_moss", erode = true },
+  { name = "default:silver_sand", erode = true },
   { name = "aotearoa:forest_peat", erode = true },
   { name = "aotearoa:dirt_with_dark_litter", erode = true },
   { name = "aotearoa:restiad_peat", erode = true },
@@ -45,6 +47,7 @@ for _,c in ipairs(floodables) do
           --minetest.remove_node( { x = pos.x, y = pos.y-1, z = pos.z } )
 		  minetest.set_node({ x = pos.x, y = pos.y-1, z = pos.z }, {name="air"})
 		  --minetest.set_node({ x = pos.x, y = pos.y, z = pos.z }, {name="air"})
+		  --minetest.set_node({ x = pos.x, y = pos.y+1, z = pos.z }, {name="air"})
         end
       end
     })
@@ -69,6 +72,7 @@ for _,c in ipairs(floodables) do
               --minetest.remove_node( { x = pos.x, y = pos.y-1, z = pos.z } )
 			  minetest.set_node({ x = pos.x, y = pos.y-1, z = pos.z }, {name="air"})
 			  --minetest.set_node({ x = pos.x, y = pos.y, z = pos.z }, {name="air"})
+			  --minetest.set_node({ x = pos.x, y = pos.y+1, z = pos.z }, {name="air"})
             end
           end
         })
