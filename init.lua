@@ -6,12 +6,9 @@ floodables = {
   { group = "grass", erode = true },
   { group = "dry_grass", erode = true },
   { name = "default:dirt_with_grass", erode = true },
-  --{ group = "wood", erode = true },
-  --{ group = "tree", erode = true },
   { group = "sapling", erode = true },
   { group = "flora", erode = true },
   { group = "flower", erode = true },
-  --{ group = "soil", erode = true },  this causes massive lag for me
   { name = "default:dirt_with_dry_grass", erode = true },
   { name = "default:dirt", erode = true },
   { name = "default:dirt_with_rainforest_litter", erode = true },
@@ -27,6 +24,9 @@ floodables = {
   { name = "aotearoa:peat", erode = true },
 }
 
+  --{ group = "wood", erode = true },
+  --{ group = "tree", erode = true },
+   --{ group = "soil", erode = true },  this causes massive lag for me 
 for _,c in ipairs(floodables) do
   if c.name ~=nil then
     minetest.override_item(c.name, {
